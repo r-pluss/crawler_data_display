@@ -1,0 +1,9 @@
+{
+    "name": "crawler_data_display",
+    "description": "An application to display the structured data collected by the directed crawler project",
+    "version": "0.0.1",
+    "main": "./main.js",
+    "scripts": {
+        "start": "electron ."
+    }
+}
