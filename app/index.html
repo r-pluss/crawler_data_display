@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang= 'en' ng-app= 'app'>
     <head>
         <link rel= 'stylesheet' href='./style.css'>
     </head>
     <body>
-        <main>
+        <main data-ng-controller= 'mainController as main'>
             <div id= 'side-bar'>
             </div>
             <div id= 'thumb-display'>
@@ -22,5 +22,7 @@
             </div>
         </main>
         <script src= './js/vendor/angular_1.5.8.min.js' type= 'text/javascript'></script>
+        <script src= './js/app.module.js' type= 'text/javascript'></script>
+        <script src= './js/main.controller.js' type= 'text/javascript'></script>
     </body>
 </html>
