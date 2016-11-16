@@ -3,9 +3,10 @@ body {
 }
 
 .thumb-container {
-    background-color: 'black';
+    background-color: black;
+    float: left;
     height: 25vh;
-    margin: 8.3vw 8.3vh;
+    margin: 2.5vh 0.83vw;
     width: 25vw;
 }
 
