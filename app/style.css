@@ -2,12 +2,38 @@ body {
     margin: 0;
 }
 
+.thumb-bottom {
+    margin-bottom: 1.5vh;
+    margin-top: 0.75vh;
+}
+
 .thumb-container {
     background-color: black;
     float: left;
-    height: 25vh;
-    margin: 2.5vh 0.83vw;
+    height: 28vh;
+    margin-bottom: 0.75vh;
+    margin-top: 0.75vh;
     width: 25vw;
+}
+
+.thumb-left {
+    margin-left: 1.25vw;
+    margin-right: 0.625vw;
+}
+
+.thumb-mid {
+    margin-left: 0.625vw;
+    margin-right: 0.625vw;
+}
+
+.thumb-right {
+    margin-left: 0.625vw;
+    margin-right: 1.25vw;
+}
+
+.thumb-top {
+    margin-bottom: 0.75vh;
+    margin-top: 1.5vh;
 }
 
 #bottom-bar {
