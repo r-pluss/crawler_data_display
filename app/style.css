@@ -8,7 +8,10 @@ body {
 
 #bottom-bar {
     background-color: #283033;
-    height: 20vh;
+    height: 10vh;
+    left: 20vw;
+    position: absolute;
+    top: 90vh;
     width: 80vw;
 }
 
@@ -20,5 +23,8 @@ body {
 
 #thumb-display {
     height: 80vh;
+    left: 20vw;
+    position: absolute;
+    top: 0;
     width: 80vw;
 }
