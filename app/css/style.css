@@ -46,6 +46,21 @@ body {
     width: 80vw;
 }
 
+#next-arrow {
+    float: right;
+}
+
+#page-controls {
+    left: 40vw;
+    margin-top: 2.5vh;
+    position: absolute;
+    top: 90vh;
+}
+
+#prev-arrow {
+    float: left;
+}
+
 #side-bar {
     background-color: #283033;
     height: 100vh;
