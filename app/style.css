@@ -4,6 +4,9 @@ body {
 
 .thumb-container {
     background-color: 'black';
+    height: 25vh;
+    margin: 8.3vw 8.3vh;
+    width: 25vw;
 }
 
 #bottom-bar {
