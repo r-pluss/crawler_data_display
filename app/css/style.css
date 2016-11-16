@@ -51,12 +51,12 @@ i {
 }
 
 #next-arrow {
+    cursor: pointer;
     float: right;
 }
 
 #page-controls {
     color: black;
-    cursor: pointer;
     left: 40vw;
     margin-top: 2.5vh;
     position: fixed;
@@ -65,6 +65,7 @@ i {
 }
 
 #prev-arrow {
+    cursor: pointer;
     float: left;
 }
 
