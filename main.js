@@ -14,7 +14,8 @@ if(debugMode){
 app.on('ready', function(){
     mainWindow = new BrowserWindow({
         width: electron.screen.getPrimaryDisplay().size.width,
-        height: electron.screen.getPrimaryDisplay().size.height
+        height: electron.screen.getPrimaryDisplay().size.height,
+        webPreferences: { nodeIntegration: true}
     });
     mainWindow.loadURL('file://' + __dirname + '/app/index.html');
 });
