@@ -9,6 +9,7 @@
 
     function mainController(){
         const self = this;
+        self.fs = require('fs');
         self.ui = {
             events: {
                 dincPage: deIncrementPageNumber,
