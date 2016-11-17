@@ -14,12 +14,14 @@
             events: {
                 dincPage: deIncrementPageNumber,
                 exitFullScreen: exitFullScreen,
+                fsKeyUp: fullScreenKeyListener,
                 fullScreen: fsElement,
                 incPage: incrementPageNumber,
                 nextFSImage: nextFSImage,
                 pageChange: pageChangeEvent,
                 prevFSImage: prevFSImage
-            }
+            },
+            fullScreenMode: false
         };
         self.thumbCollection = [
             {elem: 'thumb-0', position: 0, currentImgRawPath: null, currentIndex: null},
@@ -47,7 +49,9 @@
             {path: './test_images/1440_900.png'},
             {path: './test_images/1800_600.png'},
             {path: './test_images/1920_1080.png'},
-            {path: './test_images/7680_4320.png'}
+            {path: './test_images/7680_4320.png'},
+            {path: './test_images/amd1-001.gif'},
+            {path: './test_images/amd1-028.gif'}
         ];
         self.currentPage = null;
         self.fsIndex = null;
@@ -77,6 +81,7 @@
             window.document.getElementById('thumb-6').addEventListener('click', self.ui.events.fullScreen);
             window.document.getElementById('thumb-7').addEventListener('click', self.ui.events.fullScreen);
             window.document.getElementById('thumb-8').addEventListener('click', self.ui.events.fullScreen);
+            window.addEventListener('keyup', self.ui.events.fsKeyUp);
         }
 
         function pageChangeEvent(){
@@ -139,11 +144,13 @@
             let el = window.document.getElementById('fs-viewer');
             el.style.position = 'static';
             el.webkitRequestFullScreen();
+            self.ui.fullScreenMode = true;
         }
 
         function exitFullScreen(e){
             if(['fs-viewer', 'fs-image'].indexOf(e.srcElement.id) > -1 ){
                 window.document.getElementById('fs-viewer').style.position = 'fixed';
+                self.ui.fullScreenMode = false;
                 self.fsIndex = null;
                 if(window.document.webkitIsFullScreen){
                     window.document.webkitExitFullscreen();
@@ -154,7 +161,7 @@
         function nextFSImage(e){
             e.preventDefault();
             e.stopPropagation();
-            if((self.fsIndex + 1) < (self.testImages.length - 1)){
+            if(self.fsIndex + 1 < self.testImages.length){
                 window.document.getElementById('fs-image').src = self.testImages[self.fsIndex + 1].path;
                 self.fsIndex++;
             }
@@ -166,6 +173,16 @@
             if(self.fsIndex > 0){
                 window.document.getElementById('fs-image').src = self.testImages[self.fsIndex - 1].path;
                 self.fsIndex--;
+            }
+        }
+
+        function fullScreenKeyListener(e){
+            if(self.ui.fullScreenMode && ['ArrowLeft', 'ArrowRight'].indexOf(e.key) !== -1){
+                if(e.key === 'ArrowLeft'){
+                    prevFSImage(e);
+                }else{
+                    nextFSImage(e);
+                }
             }
         }
 
