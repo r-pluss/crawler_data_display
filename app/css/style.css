@@ -2,6 +2,11 @@ body {
     margin: 0;
 }
 
+.fs-control {
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
 .thumb-bottom {
     margin-bottom: 1.5vh;
     margin-top: 0.75vh;
@@ -9,6 +14,9 @@ body {
 
 .thumb-container {
     background-color: black;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14),0 1px 18px 0 rgba(0,0,0,0.12),0 3px 5px -1px rgba(0,0,0,0.3);
     float: left;
     height: 28vh;
@@ -38,12 +46,31 @@ body {
 }
 
 #bottom-bar {
-    background-color: #283033;
+    background-color: #21252b;
     height: 10vh;
     left: 20vw;
-    position: absolute;
+    position: fixed;
     top: 90vh;
     width: 80vw;
+}
+
+#fs-next-arrow {
+    margin-left: 20px;
+}
+
+#fs-prev-arrow {
+    margin-right: 20px;
+}
+
+#fs-viewer {
+    background-color: black;
+    color: #e8eaea;
+    display: flex;
+    left: 110vw;
+    min-height: 1px;
+    min-width: 1px;
+    position: fixed;
+    top: 110vh;
 }
 
 #next-arrow {
@@ -66,12 +93,13 @@ body {
 }
 
 #side-bar {
-    background-color: #283033;
+    background-color: #21252b;
     height: 100vh;
     width: 20vw;
 }
 
 #thumb-display {
+    background-color: #282c34;
     height: 90vh;
     left: 20vw;
     position: absolute;
