@@ -160,7 +160,7 @@
         }
 
         function prevFSImage(e){
-            e.preventDefault():
+            e.preventDefault();
             e.stopPropagation();
             if(self.fsIndex > 0){
                 window.document.getElementById('fs-image').src = self.testImages[self.fsIndex - 1].path;
