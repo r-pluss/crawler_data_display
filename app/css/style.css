@@ -94,7 +94,7 @@ body {
     color: #56b6c2;
     font-size: 100%;
     margin-left: 5vw;
-    margin-top: 40vh;
+    margin-top: 25vh;
 }
 
 #page-jump-input {
@@ -119,6 +119,13 @@ body {
     width: 20vw;
 }
 
+#title-badge {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 10vh;
+    margin-top: 5vh;
+}
 #thumb-display {
     background-color: #282c34;
     height: 90vh;
