@@ -69,6 +69,8 @@
             window.document.getElementById('thumb-7').addEventListener('click', self.ui.events.fullScreen);
             window.document.getElementById('thumb-8').addEventListener('click', self.ui.events.fullScreen);
             window.addEventListener('keyup', self.ui.events.fsKeyUp);
+            window.document.getElementById('jump-click').addEventListener('click', pageJumpClickHandler);
+            window.addEventListener('unload', persistApplicationState);
         }
 
         function pageChangeEvent(){
@@ -94,6 +96,7 @@
                 thumb.currentIndex = getImgCollectionIndex(thumb.position);
                 window.document.getElementById(thumb.elem).style.backgroundImage = imgPath;
             }
+            window.document.getElementById('page-jump-input').value = self.currentPage;
         }
 
         function imageURLFromSequence(thumbPosition){
@@ -180,16 +183,32 @@
             if(config.titleBadge){
                 setTitleBadge(config.titleBadge);
             }
-            if(self.fs.existsSync('./persist.json')){
-                let savedState = self.fs.readFileSync('./app/persist.json');
+            if(self.fs.existsSync('./app/persist.json')){
+                console.log('found json persistence file');
+                let savedState = window.JSON.parse(self.fs.readFileSync('./app/persist.json'));
                 if(savedState.currentPage){
+                    console.log('setting page number from persisted data');
                     self.currentPage = savedState.currentPage;
+                    window.document.getElementById('page-jump-input').value = self.currentPage;
                 }
             }
         }
 
         function setTitleBadge(path){
             window.document.getElementById('title-badge').style.backgroundImage = `url(${path})`;
+        }
+
+        function pageJumpClickHandler(e){
+            let v = window.Number.parseInt(window.document.getElementById('page-jump-input').value, 10);
+            if(window.Number.isInteger(v) && v !== self.currentPage && v > 0 && v <= self.totalPages){
+                self.currentPage = v;
+                self.ui.events.pageChange();
+            }
+        }
+
+        function persistApplicationState(){
+            let data = {currentPage: self.currentPage};
+            self.fs.writeFileSync('./app/persist.json', window.JSON.stringify(data));
         }
 
     }
