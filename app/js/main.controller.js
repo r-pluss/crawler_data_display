@@ -34,32 +34,19 @@
             {elem: 'thumb-7', position: 7, currentImgRawPath: null, currentIndex: null},
             {elem: 'thumb-8', position: 8, currentImgRawPath: null, currentIndex: null}
         ];
-        self.testImages = [
-            {path: './test_images/300_400.png'},
-            {path: './test_images/350_150.png'},
-            {path: './test_images/480_320.png'},
-            {path: './test_images/500_500.png'},
-            {path: './test_images/600_800.png'},
-            {path: './test_images/600_1800.png'},
-            {path: './test_images/720_480.png'},
-            {path: './test_images/850_650.png'},
-            {path: './test_images/1080_720.png'},
-            {path: './test_images/1200_900.png'},
-            {path: './test_images/1280_720.png'},
-            {path: './test_images/1440_900.png'},
-            {path: './test_images/1800_600.png'},
-            {path: './test_images/1920_1080.png'},
-            {path: './test_images/7680_4320.png'},
-            {path: './test_images/amd1-001.gif'},
-            {path: './test_images/amd1-028.gif'}
-        ];
+
         self.currentPage = null;
         self.fsIndex = null;
+        self.totalPages = null;
 
         activate();
 
         function activate(){
-            self.currentPage = 1;
+            readJSONConfig();
+            self.totalPages = Math.ceil(self.content.length / self.thumbCollection.length);
+            if(self.currentPage === null){
+                self.currentPage = 1;
+            }
             registerInitialEventHandlers();
             self.ui.events.pageChange();
         }
@@ -89,11 +76,21 @@
             window.document.getElementById('thumb-display').dispatchEvent(e);
         }
 
+        function fullScreenKeyListener(e){
+            if(self.ui.fullScreenMode && ['ArrowLeft', 'ArrowRight'].indexOf(e.key) !== -1){
+                if(e.key === 'ArrowLeft'){
+                    prevFSImage(e);
+                }else{
+                    nextFSImage(e);
+                }
+            }
+        }
+
         function pageChangeHandler() {
             let imgPath;
             for(let thumb of self.thumbCollection){
                 imgPath = imageURLFromSequence(thumb.position);
-                thumb.currentImgRawPath = imgPath !== 'none' ? self.testImages[getImgCollectionIndex(thumb.position)].path : null;
+                thumb.currentImgRawPath = imgPath !== 'none' ? self.content[getImgCollectionIndex(thumb.position)].path : null;
                 thumb.currentIndex = getImgCollectionIndex(thumb.position);
                 window.document.getElementById(thumb.elem).style.backgroundImage = imgPath;
             }
@@ -101,7 +98,7 @@
 
         function imageURLFromSequence(thumbPosition){
             try{
-                return `url(${self.testImages[getImgCollectionIndex(thumbPosition)].path})`;
+                return `url(${self.content[getImgCollectionIndex(thumbPosition)].path})`;
             }catch(e){
                 return 'none';
             }
@@ -109,11 +106,11 @@
 
         function getImgCollectionIndex(thumbPosition){
             let i = self.thumbCollection.length * (self.currentPage - 1) + thumbPosition;
-            return i < self.testImages.length ? i : null;
+            return i < self.content.length ? i : null;
         }
 
         function incrementPageNumber(){
-            if(self.currentPage < Math.ceil(self.testImages.length / self.thumbCollection.length)){
+            if(self.currentPage < self.totalPages){
                 self.currentPage++;
                 self.ui.events.pageChange();
             }
@@ -161,8 +158,8 @@
         function nextFSImage(e){
             e.preventDefault();
             e.stopPropagation();
-            if(self.fsIndex + 1 < self.testImages.length){
-                window.document.getElementById('fs-image').src = self.testImages[self.fsIndex + 1].path;
+            if((self.fsIndex + 1) < (self.content.length - 1)){
+                window.document.getElementById('fs-image').src = self.content[self.fsIndex + 1].path;
                 self.fsIndex++;
             }
         }
@@ -171,19 +168,28 @@
             e.preventDefault();
             e.stopPropagation();
             if(self.fsIndex > 0){
-                window.document.getElementById('fs-image').src = self.testImages[self.fsIndex - 1].path;
+                window.document.getElementById('fs-image').src = self.content[self.fsIndex - 1].path;
                 self.fsIndex--;
             }
         }
 
-        function fullScreenKeyListener(e){
-            if(self.ui.fullScreenMode && ['ArrowLeft', 'ArrowRight'].indexOf(e.key) !== -1){
-                if(e.key === 'ArrowLeft'){
-                    prevFSImage(e);
-                }else{
-                    nextFSImage(e);
+        function readJSONConfig(){
+            let data = self.fs.readFileSync('./app/config.json', {encoding: 'utf-8', flag: 'r'});
+            let config = window.JSON.parse(data);
+            self.content = config.imageData;
+            if(config.titleBadge){
+                setTitleBadge(config.titleBadge);
+            }
+            if(self.fs.existsSync('./persist.json')){
+                let savedState = self.fs.readFileSync('./app/persist.json');
+                if(savedState.currentPage){
+                    self.currentPage = savedState.currentPage;
                 }
             }
+        }
+
+        function setTitleBadge(path){
+            window.document.getElementById('title-badge').style.backgroundImage = `url(${path})`;
         }
 
     }
