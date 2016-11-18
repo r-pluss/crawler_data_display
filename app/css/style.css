@@ -76,6 +76,10 @@ body {
     top: 110vh;
 }
 
+#jump-click {
+    cursor: pointer;
+}
+
 #next-arrow {
     cursor: pointer;
     float: right;
