@@ -79,11 +79,21 @@
         }
 
         function fullScreenKeyListener(e){
-            if(self.ui.fullScreenMode && ['ArrowLeft', 'ArrowRight'].indexOf(e.key) !== -1){
-                if(e.key === 'ArrowLeft'){
-                    prevFSImage(e);
-                }else{
-                    nextFSImage(e);
+            if(self.ui.fullScreenMode){
+                switch (e.key) {
+                    case 'ArrowLeft':
+                        prevFSImage(e);
+                        break;
+                    case 'ArrowRight':
+                        nextFSImage(e);
+                        break;
+                    case 'Esc':
+                    case 'Escape':
+                        e._user_exit = true;
+                        exitFullScreen(e);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -148,7 +158,7 @@
         }
 
         function exitFullScreen(e){
-            if(['fs-viewer', 'fs-image'].indexOf(e.srcElement.id) > -1 ){
+            if( e._user_exit || ['fs-viewer', 'fs-image'].indexOf(e.srcElement.id) > -1){
                 window.document.getElementById('fs-viewer').style.position = 'fixed';
                 self.ui.fullScreenMode = false;
                 self.fsIndex = null;
