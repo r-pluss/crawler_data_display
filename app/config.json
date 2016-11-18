@@ -1,0 +1,19 @@
+{
+    "imageData": [
+        {"path": "./test_images/300_400.png"},
+        {"path": "./test_images/350_150.png"},
+        {"path": "./test_images/480_320.png"},
+        {"path": "./test_images/500_500.png"},
+        {"path": "./test_images/600_800.png"},
+        {"path": "./test_images/600_1800.png"},
+        {"path": "./test_images/720_480.png"},
+        {"path": "./test_images/850_650.png"},
+        {"path": "./test_images/1080_720.png"},
+        {"path": "./test_images/1200_900.png"},
+        {"path": "./test_images/1280_720.png"},
+        {"path": "./test_images/1440_900.png"},
+        {"path": "./test_images/1800_600.png"},
+        {"path": "./test_images/1920_1080.png"},
+        {"path": "./test_images/7680_4320.png"}
+    ]
+}
