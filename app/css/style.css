@@ -1,3 +1,32 @@
+@font-face {
+    font-family: ArchitectsDaughter;
+    src: url(../fonts/ArchitectsDaughter.ttf);
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Bangers;
+    src: url(../fonts/Bangers.ttf);
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: CarterOne;
+    src: url(../fonts/CarterOne.ttf);
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: FasterOne;
+    src: url(../fonts/FasterOne-Regular.ttf);
+    font-weight: 400;
+    font-style: normal;
+}
+
+
 body {
     margin: 0;
 }
@@ -96,6 +125,7 @@ body {
 
 #page-jump {
     color: #56b6c2;
+    font-family: ArchitectsDaughter;
     font-size: 100%;
     margin-left: 5vw;
     margin-top: 25vh;
@@ -105,6 +135,7 @@ body {
     background-color: inherit;
     border: none;
     color: #56b6c2;
+    font-family: ArchitectsDaughter;
     font-size: 100%;
     padding: 0;
     text-align: right;
@@ -130,6 +161,14 @@ body {
     height: 10vh;
     margin-top: 5vh;
 }
+
+#title-text {
+    color: #ababfe;
+    font-family: Bangers;
+    font-size: 2.5em;
+    text-align: center;
+}
+
 #thumb-display {
     background-color: #282c34;
     height: 90vh;
