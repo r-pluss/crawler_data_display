@@ -8,8 +8,9 @@
         <main data-ng-controller= 'mainController as main'>
             <div id= 'side-bar'>
                 <div id= 'title-badge'></div>
+                <div id= 'title-text'>A Title Goes Here</div>
                 <div id= 'page-jump'>
-                    <label for= 'page-jump-input'>Jump to page : </label>
+                    <label for= 'page-jump-input'><span id= 'jump-click'>Jump to page</span> : </label>
                     <input id='page-jump-input' type='number' min= '1' step= '1' value='1' max= {{main.totalPages}}>
                     <label> / &nbsp; {{main.totalPages}}</label>
                 </div>
