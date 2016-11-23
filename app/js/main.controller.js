@@ -9,6 +9,9 @@
 
     function mainController(){
         const self = this;
+        const saveStatePath = './app/persist.json';
+        const configPath = './app/config.json';
+
         self.fs = require('fs');
         self.ui = {
             events: {
@@ -43,6 +46,7 @@
 
         function activate(){
             readJSONConfig();
+            loadSavedState();
             self.totalPages = Math.ceil(self.content.length / self.thumbCollection.length);
             if(self.currentPage === null){
                 self.currentPage = 1;
@@ -187,19 +191,20 @@
         }
 
         function readJSONConfig(){
-            let data = self.fs.readFileSync('./app/config.json', {encoding: 'utf-8', flag: 'r'});
+            let data = self.fs.readFileSync(configPath, {encoding: 'utf-8', flag: 'r'});
             let config = window.JSON.parse(data);
             self.content = config.imageData;
             if(config.titleBadge){
                 setTitleBadge(config.titleBadge);
             }
-            if(self.fs.existsSync('./app/persist.json')){
-                console.log('found json persistence file');
-                let savedState = window.JSON.parse(self.fs.readFileSync('./app/persist.json'));
+        }
+
+        function loadSavedState(){
+            if(self.fs.existsSync(saveStatePath)){
+                let savedState = window.JSON.parse(self.fs.readFileSync(saveStatePath));
                 if(savedState.currentPage){
-                    console.log('setting page number from persisted data');
                     self.currentPage = savedState.currentPage;
-                    window.document.getElementById('page-jump-input').value = self.currentPage;
+                    window.document.getElementById('page-jump-input').value = self.currentPage
                 }
             }
         }
@@ -218,7 +223,7 @@
 
         function persistApplicationState(){
             let data = {currentPage: self.currentPage};
-            self.fs.writeFileSync('./app/persist.json', window.JSON.stringify(data));
+            self.fs.writeFileSync(saveStatePath, window.JSON.stringify(data));
         }
 
     }
